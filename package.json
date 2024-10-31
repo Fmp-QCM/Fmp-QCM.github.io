@@ -1,0 +1,14 @@
+{
+    "name": "my-nw-app",
+    "main": "index.html",
+    "version": "1.0.0",
+    "description": "My first NW.js app",
+    "node": true,
+    "window": {
+      "title": "My NW.js App",
+      "width": 800,
+      "height": 600,
+      "position": "center"
+    }
+  }
+  

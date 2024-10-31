@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"content="default-src 'self'; script-src 'self';">
+    <link rel="stylesheet" href="style.css">
+    <title>Dynamic Forms</title>
+</head>
+
+<body>
+    <ovelay>
+        <div class="overlay" id="overlay">
+            <div class="score__pop" id="score__pop">
+                <p class="score__text" id="score__text">Your Score is:</p>
+                <div class="score__box" id="score__box">
+                    <p class="score" id="score"></p>
+                    <div class="line"></div>
+                    <p class="score__div" id="score_div"></p>
+                </div>
+                <button class="overlay__okay" id="overlay__okay">Okay!</button>
+            </div>
+        </div>
+    </ovelay>
+    <!--style="position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;overflow: auto;margin-inline-start: 8px;"-->
+    <main>
+        <div class="nav">
+            <label class="nav__label float_right click" for="next" id="label_next_1">&#11166;</label>
+            <label class="nav__label float_left click" for="back" id="label_back_1">&#11164;</label>
+            <button class="btns" id="next"></button>
+            <button class="btns" id="back"></button>
+            <div class="disp__div" id="disp__div">
+                <div class="disp__menu" id="disp__menu">
+                    <label class="nav__btns" id="disp">Title</label>
+                    <label class="nav__btns disp">Divider</label>
+                    <input class="btns disp__radio" type="radio" name="divider" id="disp_radio_5" checked>
+                    <label class="nav__btns disp" id="disp_5" for="disp_radio_5">1..10</label>
+                    <input class="btns disp__radio" type="radio" name="divider" id="disp_radio_2">
+                    <label class="nav__btns disp" id="disp_2" for="disp_radio_2">1..25</label>
+                    <input class="btns disp__radio" type="radio" name="divider" id="disp_radio_1">
+                    <label class="nav__btns disp" id="disp_1" for="disp_radio_1">1..50</label>
+                </div>
+            </div>
+        </div>
+        <!--hr--><div id="forms-container"></div><!--hr-->
+        <div class="nav">
+            <label class="nav__label float_right click" for="next" id="label_next_2">&#11166;</label>
+            <label class="nav__label float_left click"  for="back" id="label_back_2">&#11164;</label>
+            <button class="nav__btns float_right click" id="crct">Correct All</button>
+        </div>
+    </main>
+    <script src="script.min.js"></script>
+</body>
+
+</html>
