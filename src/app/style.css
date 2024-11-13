@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    background-color: rgb(70, 109, 128);
+}
+
+menu {
+    top: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: sticky;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(121, 186, 216);
+    -webkit-app-region: drag;
+}
+
+iframe {
+    border: 0;
+    width:100%;
+    height: calc(100vh - 55px - 4px);
+}
+
+.ttl {
+    width: 100vw;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    text-transform: capitalize;
+}
+
+.tit {
+    width: 200px;
+    height: 30px;
+    display: flex;
+    border-radius: 3px;
+    align-items: center;
+    justify-content: center;
+    border:  3px solid rgb(155, 155, 155);
+    background-color: rgba(201, 201, 201, 0.548);
+}
+
+.nav {
+    height: 55px;
+    width: 120px;
+    flex-shrink: 0;
+    -webkit-app-region: no-drag;
+}
+
+.lab {
+    z-index: 3;
+    width: 120px;
+    height: 55px;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    background-color: hsl(180, 97%, 30%);
+}
+
+img {
+    z-index: 2;
+    margin: 2px;
+    position: relative;
+}
+
+label {
+    z-index: 1;
+    margin: 4px;
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    position: relative;
+    animation: label 0.5s;
+}
+/*
+label::after {
+    content: '↓';
+}
+*/
+ul {
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    width: 120px;
+    display: none;
+    list-style: none;
+    position: absolute;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;/**/
+
+}
+
+li {
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+    height: 35px;
+    width: 100px;
+    padding: 9px;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    align-content: center;
+    background-color: gray;
+    text-transform: capitalize;
+    animation: drop 0.5s forwards;
+    border: 1px solid transparent;
+    transform: translateY(-150px);
+    animation-delay: calc(0.05s * var(--i));/**/
+}
+
+.nav:hover .lab {
+    background-color: hsl(192, 97%, 35%);
+}
+
+.nav:hover ul {
+    display: flex;
+}
+
+.nav:hover label {
+    display: block;
+}
+
+.nav:hover img {
+    animation: img 0.5s;
+}
+
+li:hover {
+    font-size: 120%;
+    transition: border 0.05s;
+    border-color: rgb(230, 230, 230);
+    background-color: hsl(0, 0%, 30%);
+}
+
+li:active {
+    font-size: 100%;
+}
+
+@keyframes drop {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+@keyframes label {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+}
+
+@keyframes img {
+    from {
+        transform: translateX(20px);
+    }
+}

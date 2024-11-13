@@ -1,0 +1,9 @@
+{
+    "name": "fmp-qcm",
+    "version": "1.0.0",
+    "main": "./electron/main.js",
+    "type": "module",
+    "author": "benz",
+    "license": "GPL-3.0-only",
+    "description": "FMP QCM"
+}

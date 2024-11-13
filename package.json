@@ -1,0 +1,23 @@
+{
+    "name": "fmp-qcm",
+    "version": "1.0.0",
+    "main": "./electron/main.js",
+    "type": "module",
+    "scripts": {
+        "start": "electron ./src",
+        "build": "node build.js",
+        "dist": "electron-builder",
+        "dist:win": "electron-builder -w",
+        "dist:mac": "electron-builder -m",
+        "dist:linux": "electron-builder -l",
+        "dist:All": "electron-builder -wml"
+    },
+    "keywords": [],
+    "author": "benz",
+    "license": "GPL-3.0-only",
+    "description": "FMP QCM",
+    "devDependencies": {
+        "electron": "^33.0.2",
+        "electron-builder": "^25.1.8"
+    }
+}

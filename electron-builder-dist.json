@@ -1,0 +1,87 @@
+{
+    "appId": "com.benz.fmpqcm",
+    "productName": "Fmp QCM",
+    "asar": true,
+    "directories": {
+        "output": "dist"
+    },
+    "files": [
+        "./node_modules/**/*",
+        {
+            "from": "./src/app",
+            "to": "app"
+        },
+        {
+            "from": "./src/electron",
+            "to": "electron"
+        }
+    ],
+    "extraResources": [
+        {
+            "from": "./assets/",
+            "to": "assets",
+            "filter": [
+                "**/*"
+            ]
+        },
+        {
+            "from": "./data/",
+            "to": "data",
+            "filter": [
+                "**/*"
+            ]
+        },
+        {
+            "from": "./LICENSE",
+            "to": "LICENSE"
+        }
+    ],
+    "win": {
+        "target": [
+            "nsis",
+            "portable"
+        ],
+        "arch": [
+            "x64",
+            "ia32"
+        ],
+        "icon": "./assets/icon.ico"
+    },
+    "mac": {
+        "target": [
+            "dmg",
+            "zip"
+        ],
+        "arch": [
+            "x64",
+            "arm64",
+            "universal"
+        ],
+        "icon": "./assets/icon.icns",
+        "hardenedRuntime": true,
+        "gatekeeperAssess": false,
+        "entitlements": "entitlements.mac.plist",
+        "entitlementsInherit": "entitlements.mac.plist"
+    },
+    "linux": {
+        "target": [
+            "AppImage",
+            "deb",
+            "snap"
+        ],
+        "arch": [
+            "x64",
+            "armv7l",
+            "arm64"
+        ],
+        "category": "Utility",
+        "icon": "./assets/icon.ico"
+    },
+    "nsis": {
+        "oneClick": false,
+        "allowToChangeInstallationDirectory": true,
+        "installerIcon": "./assets/icon.ico",
+        "uninstallerIcon": "./assets/icon.ico",
+        "license": "LICENSE"
+    }
+}
