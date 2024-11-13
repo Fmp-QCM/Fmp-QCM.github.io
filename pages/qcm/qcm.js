@@ -1,5 +1,5 @@
 import { createForms, crct, getAnswer, nav_visible } from "./utils.js";
-import { decode, encode } from "../cryptor.js";
+import { decode, encode } from "../../cryptor.js";
 
 let min = 1;
 let max = 50;
