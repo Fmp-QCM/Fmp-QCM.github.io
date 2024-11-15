@@ -30,26 +30,24 @@ echo.
     exit /b
 
     :def-case
-        if "!_cmd_:~0,1!" equ "$" (
-            !_cmd_:~1! & exit /b
-        )
-        git !_cmd_!
-        exit /b 0
+        if "!_cmd_:~0,1!" equ "$" !_cmd_:~1! & exit /b
+        if "!_cmd_:~0,1!" equ "#" !_cmd_:~1! & exit /b
+        git !_cmd_! & exit /b
     
     :cls
     :clr
         cls
-        exit /b 0
+        exit /b
     :?
     :-?
         call :_help_
-        exit /b 0
+        exit /b
 
 :git-branch
     set "branch=*"
     for /f "delims=" %%i in (' git branch --list 2^>nul ') do (
         set "branch=%%i"
-        if "!branch:~0,1!" == "*" (
+        if "!branch:~0,1!" equ "*" (
             set "branch=!branch:~2!"
             exit /b
         )
