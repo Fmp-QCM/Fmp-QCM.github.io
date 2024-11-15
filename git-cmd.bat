@@ -55,7 +55,7 @@ echo.
     exit /b
 
 :_help_
-    echo [94mGit-cmd![93m[3m Faster git execution
+    echo [94mGit-cmd![93;5;3m Faster git execution
     echo    [0mtype:
     echo       [91mexit[0m,[91m quit [90m:[0m to quit Git-cmd.
     echo        [93mcls[0m,[93m clr  [90m:[0m to clear the console.
