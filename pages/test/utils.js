@@ -1,4 +1,4 @@
-import { json_data, answer, correct } from "./qcm.js";
+import { json_data, answer, correct } from "./test.js";
 
 /**
  * Generate Forms
