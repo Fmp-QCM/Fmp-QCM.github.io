@@ -37,11 +37,11 @@ echo.
     :cls
     :clr
         cls
-        exit /b
+        exit /b 0
     :?
     :-?
         call :_help_
-        exit /b
+        exit /b 0
 
 :git-branch
     set "branch=*"
