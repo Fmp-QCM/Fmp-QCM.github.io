@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from "electron";
+import { decode, encode } from "./cryptor.js";
 /*
 const path = require('path');
 

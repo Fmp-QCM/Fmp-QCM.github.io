@@ -1,8 +1,7 @@
 node_modules/
-test/
+/test*
 dist/
 .vscode/
 .backup/
 web-page/
-LICENSE.old
-test.bat
+*.old

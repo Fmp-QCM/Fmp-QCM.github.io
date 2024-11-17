@@ -38,7 +38,7 @@ window.onload = () => {
                     fram.src = './pages/module/module.html'
                     break;
                 case 'qcm':
-                    fram.src = './pages/qcm/qcm.html'
+                    fram.src = './pages/test/test.html'
                     break;
                 case 'download':
                     fram.src = './pages/download/download.html'
