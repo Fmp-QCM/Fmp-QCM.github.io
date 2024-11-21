@@ -2,10 +2,9 @@
     "name": "fmp-qcm",
     "version": "1.6.0",
     "main": "./electron/main.js",
-    "type": "module",
     "scripts": {
         "start": "electron ./src",
-        "build": "node build.js",
+        "test": "electron ./test",
         "dist": "electron-builder",
         "dist:win": "electron-builder -w",
         "dist:mac": "electron-builder -m",
@@ -17,7 +16,11 @@
     "license": "GPL-3.0-only",
     "description": "FMP QCM",
     "devDependencies": {
+        "@types/electron": "^1.4.38",
+        "@types/jquery": "^3.5.32",
+        "@types/node": "^22.9.1",
         "electron": "^33.0.2",
-        "electron-builder": "^25.1.8"
+        "electron-builder": "^25.1.8",
+        "typescript": "^5.6.3"
     }
 }

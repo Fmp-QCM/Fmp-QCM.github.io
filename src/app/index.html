@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
     <title>Custom Title Bar</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -30,9 +30,12 @@
         <div class="nav"></div>
     </menu>
 
-    <iframe src="./pages/home/home.html"></iframe>
+    <!--iframe-- id="page_html" src="./pages/home/home.html"></!--iframe-->
+    <main id="main"></main>
 
-    <script src="./script.js"></script>
+    <script src="../electron/jquery.js"></script>
+    <!--script-- id="pagejs" type="module" src=""></!--script-->
+    <script id="main" type="module" src="./script.js"></script>
 
     <!--test content-->
     <!--div style="margin-inline: 8px;">

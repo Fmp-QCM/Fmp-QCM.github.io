@@ -1,3 +1,4 @@
+import { frame } from "../../script.js";
 import { json_data, answer, correct } from "./test.js";
 
 /**
@@ -6,13 +7,14 @@ import { json_data, answer, correct } from "./test.js";
  * @param {Number} max
  */
 export function createForms(min, max) {
-    const container = document.getElementById('forms-container');
-    document.getElementById('disp').innerText = json_data[0];
+    const frameContent = frame.contentDocument || frame.contentWindow.document; 
+    const container = frameContent.getElementById('forms-container');
+    frameContent.getElementById('disp').innerText = json_data[0];
     container.innerHTML = "";
 
     for (let i = min; i <= max; i++) {
         // Create form element
-        const form = document.createElement('form');
+        const form = frameContent.createElement('form');
         form.setAttribute('action', '');
         form.setAttribute('id', 'f' + i);
         form.setAttribute('name', 'f' + i);
@@ -20,7 +22,7 @@ export function createForms(min, max) {
         form.style.display = 'none';
 
         // Create heading
-        const heading = document.createElement('h2');
+        const heading = frameContent.createElement('h2');
         heading.id = 'f' + i + 'h2';
         heading.style.margin = '10px';
         heading.innerText = 'Q' + i + '.' + json_data[i][0];
@@ -28,33 +30,33 @@ export function createForms(min, max) {
 
         // Create checkboxs
         for (let j = 1; j <= 5; j++) {
-            const label = document.createElement('label');
+            const label = frameContent.createElement('label');
             label.classList.add('check');
             label.id = 'f' + i + 'l' + j;
             label.setAttribute('for', 'f' + i + 'q' + j);
 
-            const input = document.createElement('input');
+            const input = frameContent.createElement('input');
             input.classList.add('check__input', 'btns');
             input.type = 'checkbox';
             //(answer[i - 1].includes(j)) ? input.checked = true : null;
             input.id = 'f' + i + 'q' + j;
 
-            const div = document.createElement('div');
+            const div = frameContent.createElement('div');
             div.classList.add('check__box');
 
             label.appendChild(input);
             label.appendChild(div);
             label.append(json_data[i][1][j - 1]);
             form.appendChild(label);
-            form.appendChild(document.createElement('br'));
+            form.appendChild(frameContent.createElement('br'));
         }
 
         // Add correct and reset buttons
-        const correctLabel = document.createElement('label');
+        const correctLabel = frameContent.createElement('label');
         correctLabel.classList.add('btns__style', 'float_right', 'click');
         correctLabel.setAttribute('for', 'f' + i + 'crct');
 
-        const correctInput = document.createElement('button');
+        const correctInput = frameContent.createElement('button');
         correctInput.classList.add('btns');
         correctInput.id = 'f' + i + 'crct';
         correctInput.addEventListener('click', async () => {
@@ -64,11 +66,11 @@ export function createForms(min, max) {
         correctLabel.appendChild(correctInput);
         correctLabel.append('Correct');
 
-        const resetLabel = document.createElement('label');
+        const resetLabel = frameContent.createElement('label');
         resetLabel.classList.add('btns__style', 'float_right', 'click');
         resetLabel.setAttribute('for', 'f' + i + 'rst');
 
-        const resetInput = document.createElement('input');
+        const resetInput = frameContent.createElement('input');
         resetInput.classList.add('btns');
         resetInput.type = 'reset';
         resetInput.id = 'f' + i + 'rst';
@@ -91,14 +93,14 @@ export function createForms(min, max) {
 export function crct(form) {
     event.preventDefault();
     if (answer[form - 1].length !== 0) {
-        document.getElementById('f' + form + 'h2').innerText = 'Corrected';
+        frameContent.getElementById('f' + form + 'h2').innerText = 'Corrected';
         if (JSON.stringify(json_data[form][2].slice().sort()) === JSON.stringify(answer[form - 1].slice().sort())) {
             correct[form - 1] = 1;
         }
         else correct[form - 1] = 0;
 
         for (let i = 1; i <= 5; i++) {
-            const label = document.getElementById('f' + form + 'l' + i);
+            const label = frameContent.getElementById('f' + form + 'l' + i);
             console.log(json_data[form][2], answer[form - 1]);
             if (json_data[form][2].includes(i) && answer[form - 1].includes(i)) {
                 label.style.color = 'rgb(88, 255, 88)';
@@ -119,9 +121,9 @@ export function crct(form) {
  * @param {Number} form
  */
 export function rst(form) {
-    document.getElementById('f' + form + 'h2').innerText = 'Q' + form + '.' + json_data[form][0];
+    frameContent.getElementById('f' + form + 'h2').innerText = 'Q' + form + '.' + json_data[form][0];
     for (let i = 1; i <= 5; i++) {
-        document.getElementById('f' + form + 'l' + i).removeAttribute('style');
+        frameContent.getElementById('f' + form + 'l' + i).removeAttribute('style');
     }
 }
 
@@ -136,7 +138,7 @@ export async function getAnswer(start, end) {
     for (let i = start; i < end; i++) {
         let tmp_answer = Array();
         for (let j = 1; j <= 5; j++) {
-            if (document.getElementById('f' + i + 'q' + j).checked) {
+            if (frameContent.getElementById('f' + i + 'q' + j).checked) {
                 tmp_answer.push(j);
                 console.log(tmp_answer);
             }
@@ -152,22 +154,22 @@ export async function getAnswer(start, end) {
  */
 export function nav_visible(min, max) {
     if (min - max <= 1) {
-        document.getElementById('label_back_1').style.visibility = 'hidden';
-        document.getElementById('label_back_2').style.visibility = 'hidden';
-        //document.getElementById('disp').style.display = 'inline-block';
+        frameContent.getElementById('label_back_1').style.visibility = 'hidden';
+        frameContent.getElementById('label_back_2').style.visibility = 'hidden';
+        //frameContent.getElementById('disp').style.display = 'inline-block';
     } else {
-        document.getElementById('label_back_1').style.visibility = 'visible';
-        document.getElementById('label_back_2').style.visibility = 'visible';
-        //document.getElementById('disp').style.display = 'none';
+        frameContent.getElementById('label_back_1').style.visibility = 'visible';
+        frameContent.getElementById('label_back_2').style.visibility = 'visible';
+        //frameContent.getElementById('disp').style.display = 'none';
     }
     if (min >= 50) {
-        document.getElementById('label_next_1').style.visibility = 'hidden';
-        document.getElementById('label_next_2').style.display = 'none';
-        document.getElementById('crct').style.display = 'inline-block';
+        frameContent.getElementById('label_next_1').style.visibility = 'hidden';
+        frameContent.getElementById('label_next_2').style.display = 'none';
+        frameContent.getElementById('crct').style.display = 'inline-block';
     } else {
-        document.getElementById('label_next_1').style.visibility = 'visible';
-        document.getElementById('label_next_2').style.display = 'inline-block';
-        document.getElementById('crct').style.display = 'none';
+        frameContent.getElementById('label_next_1').style.visibility = 'visible';
+        frameContent.getElementById('label_next_2').style.display = 'inline-block';
+        frameContent.getElementById('crct').style.display = 'none';
     }
 }
 

@@ -1,5 +1,8 @@
 import { createForms, crct, getAnswer, nav_visible } from "./utils.js";
-import { decode, encode } from "../../../electron/cryptor.js";
+import { frame } from "../../script.js";
+/**
+ * @typedef {import('../../../electron/preload.cjs').Api} Api
+ */ 
 
 let min = 1;
 let max = 50;
@@ -9,42 +12,56 @@ export let json_data = Array();
 export let correct = Array(max);
 export let answer = Array.from({ length: max }, () => Array());
 
-window.onload = async () => {
-    json_data = await decode(' ', '', '../../../../data/form.b64');
+/**
+ * @type {Api}
+ * @ts-ignore */
+export const api = window.api;
 
-    const next = document.getElementById("next");
+frame.onload = async () => {
+    console.log('in test');
+    
+    json_data = await api.decode({ key: ' ', iv: '', file: 'form.b64' })
+    //json_data = await decode(' ', '', '../../../../data/form.b64');
+    console.log(json_data);
+    
+    const frameContent = frame[0]
+    console.log(frameContent);
+
+    const next = frameContent.getElementById("next");
+    console.log(next);
+    
     next.addEventListener('click', async () => {
         if (next.style.visibility != 'hidden') {
-            document.querySelectorAll('form').forEach(form => {
+            frameContent.querySelectorAll('form').forEach((/** @type {{ style: { display: string; }; }} */ form) => {
                 form.style.display = 'none';
             });
             for (let i = disp_min; i < disp_min + disp_max; i++) {
-                document.getElementById('f' + i).removeAttribute('style');
+                frameContent.getElementById('f' + i).removeAttribute('style');
             }
             disp_min += disp_max;
         }
         nav_visible(disp_min, disp_max);
     });
 
-    const back = document.getElementById("back");
+    const back = frameContent.getElementById("back");
     back.addEventListener('click', async () => {
         if (back.style.visibility != 'hidden') {
-            document.querySelectorAll('form').forEach(form => {
+            frameContent.querySelectorAll('form').forEach((/** @type {{ style: { display: string; }; }} */ form) => {
                 form.style.display = 'none';
             });
             for (let i = disp_min - 1; i >= disp_min - disp_max; i--) {
-                document.getElementById('f' + (i - disp_max)).removeAttribute('style');
+                frameContent.getElementById('f' + (i - disp_max)).removeAttribute('style');
             }
             disp_min -= disp_max;
         }
         nav_visible(disp_min, disp_max);
     });
 
-    const crct_elm = document.getElementById("crct");
+    const crct_elm = frameContent.getElementById("crct");
     crct_elm.addEventListener('click', async () => {
         if (crct_elm.innerText != 'Correct All') {
             for (let i = min; i <= max; i++) {
-                document.getElementById('f' + i + 'rst').click();
+                frameContent.getElementById('f' + i + 'rst').click();
                 answer = Array.from({ length: max }, () => Array());
             }
             crct_elm.innerText = 'Correct All';
@@ -65,12 +82,12 @@ window.onload = async () => {
                 score = 41;
                 score_div = 50;
                 console.log(`score: ${score}/${score_div}`);
-                document.body.style.overflow = 'hidden'
-                document.body.style.marginRight = '17px';
-                document.getElementById('overlay').style.display = 'block';
-                document.getElementById('score_div').innerText = score_div;
+                frameContent.body.style.overflow = 'hidden'
+                frameContent.body.style.marginRight = '17px';
+                frameContent.getElementById('overlay').style.display = 'block';
+                frameContent.getElementById('score_div').innerText = score_div;
                 for (let i = 0; i <= score; i++) {
-                    const score_elm = document.getElementById('score');
+                    const score_elm = frameContent.getElementById('score');
                     setTimeout(() => {
                         score_elm.innerText = i;
                         score_elm.style.color = `hsl(${i * 120 / score_div}, 100%, 50%)`;
@@ -82,21 +99,21 @@ window.onload = async () => {
         }
     });
 
-    document.getElementById('overlay__okay').addEventListener('click', event => {
+    frameContent.getElementById('overlay__okay').addEventListener('click', (/** @type {{ preventDefault: () => void; }} */ event) => {
         event.preventDefault();
-        document.body.removeAttribute('style');
-        document.getElementById('overlay').removeAttribute('style');
+        frameContent.body.removeAttribute('style');
+        frameContent.getElementById('overlay').removeAttribute('style');
     });
 
-    document.getElementById('overlay').addEventListener('click', event => {
-        if (!document.getElementById('score__pop').contains(event.target)) {
-            document.body.removeAttribute('style');
-            document.getElementById('overlay').removeAttribute('style');
+    frameContent.getElementById('overlay').addEventListener('click', (/** @type {{ target: any; }} */ event) => {
+        if (!frameContent.getElementById('score__pop').contains(event.target)) {
+            frameContent.body.removeAttribute('style');
+            frameContent.getElementById('overlay').removeAttribute('style');
         }
     });
 
-    document.querySelectorAll('input[name="divider"]').forEach(radio => {
-        radio.addEventListener('change', function () {
+    frameContent.querySelectorAll('input[name="divider"]').forEach((/** @type {{ addEventListener: (arg0: string, arg1: () => void) => void; }} */ radio) => {
+        radio.addEventListener('change', function (/** @type {any} */ this) {
             if (this.checked) {
                 switch (this.id) {
                     case 'disp_radio_5':
@@ -110,18 +127,18 @@ window.onload = async () => {
                         break;
                 }
                 disp_min = 1;
-                document.getElementById('next').click();
+                frameContent.getElementById('next').click();
             }
         });
     });
 
     createForms(min, max);
-    document.getElementById('next').click();
-}
+    frameContent.getElementById('next').click();
+};
 
 /**
  * @param {Number} ms 
- * @returns {Promise}
+ * @returns {Promise<null>}
  */
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

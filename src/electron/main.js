@@ -1,43 +1,58 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { decode, encode } from "./cryptor.js";
-/*
-const path = require('path');
+import { join } from "node:path";
 
-function createWindow() {
-    const win = new BrowserWindow({
-        webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
-            contextIsolation: true,
-            enableRemoteModule: false,
-            nodeIntegration: false, 
-        }
+export const __dirname = import.meta.dirname;
+
+function preload() {
+    ipcMain.handle('decode', async (event, { key, iv, fileName, filePath }) => {
+        console.log('in main', key, iv, fileName, filePath);
+        return await decode(key, iv, fileName, filePath)
+    });
+    ipcMain.handle('encode', async (event, { key, iv, fileName, filePath }) => {
+        console.log('in main', key, iv, fileName, filePath);
+        return await encode(key, iv, fileName, filePath)
     });
 }
-*/
 
 function createWindow() {
     const win = new BrowserWindow({
         width: 975,
         height: 660,
         title: 'Fmp-Qcm',
-        icon:"../../assets/icon.ico",
+        icon: "./assets/icon.ico",
         titleBarStyle: 'hidden',
         titleBarOverlay: {
             symbolColor: '#74b1be',
             color: '#2f3241',
             height: 55,
-            width: 120,
+            ////width: 120,
         },
         webPreferences: {
             //devTools: false,
             nodeIntegration: true,
-            contextIsolation: false,
+            contextIsolation: true,
+            preload: join(__dirname, 'preload.cjs')
         }
     });
-    win.loadFile('./app/index.html');
+    
+    try {
+        win.loadFile('./app/index.html');
+    } catch (error) {
+        throw new Error(`${error}`);
+    }
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+    createWindow();
+    preload();
+    
+    app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow();
+        }
+    });
+});
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -45,11 +60,6 @@ app.on('window-all-closed', () => {
     }
 });
 
-app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
-    }
-});
 
 
 /*

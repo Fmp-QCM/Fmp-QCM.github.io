@@ -6,3 +6,4 @@ dist/
 web-page/
 *.old
 git-cmd.sh
+tsconfig-init.json

@@ -15,7 +15,7 @@ menu {
     -webkit-app-region: drag;
 }
 
-iframe {
+#mainframe {
     border: 0;
     width:100%;
     height: calc(100vh - 55px - 4px);
