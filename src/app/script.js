@@ -7,6 +7,8 @@
  * @typedef {import('jquery')} $
  */
 
+export const api = window.api;
+
 /**
  * @param {String} title 
  */
@@ -56,7 +58,7 @@ const loadScript = (src) => {
     document.body.appendChild(script);*/
 };
 
-export const frame = $('main#main')[0];
+export const frame = $('main#main');
 
 window.onload = () => {
     const nav = document.querySelector('div.nav')

@@ -1,8 +1,6 @@
 import { createForms, crct, getAnswer, nav_visible } from "./utils.js";
-import { frame } from "../../script.js";
-/**
- * @typedef {import('../../../electron/preload.cjs').Api} Api
- */ 
+import { api, frame } from "../../script.js";
+ 
 
 let min = 1;
 let max = 50;
@@ -12,12 +10,7 @@ export let json_data = Array();
 export let correct = Array(max);
 export let answer = Array.from({ length: max }, () => Array());
 
-/**
- * @type {Api}
- * @ts-ignore */
-export const api = window.api;
-
-frame.onload = async () => {
+frame[0].onload = async () => {
     console.log('in test');
     
     json_data = await api.decode({ key: ' ', iv: '', file: 'form.b64' })
@@ -27,7 +20,8 @@ frame.onload = async () => {
     const frameContent = frame[0]
     console.log(frameContent);
 
-    const next = frameContent.getElementById("next");
+    //const next = frameContent.getElementById("next");
+    const next = frameContent.$('#next')[0];
     console.log(next);
     
     next.addEventListener('click', async () => {
@@ -113,7 +107,7 @@ frame.onload = async () => {
     });
 
     frameContent.querySelectorAll('input[name="divider"]').forEach((/** @type {{ addEventListener: (arg0: string, arg1: () => void) => void; }} */ radio) => {
-        radio.addEventListener('change', function (/** @type {any} */ this) {
+        radio.addEventListener('change', function () {
             if (this.checked) {
                 switch (this.id) {
                     case 'disp_radio_5':

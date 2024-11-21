@@ -1,11 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-/**
- * @typedef {Object} Api
- * @property {function(Object): Promise<any>} decode
- * @property {function(Object): Promise<any>} encode *//**
- * @type {Api}
- */
 const api = {
     decode: async (/** @type {Object} */ data) => {
         console.log('in preload', data);
