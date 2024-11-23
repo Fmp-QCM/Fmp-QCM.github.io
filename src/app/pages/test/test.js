@@ -26,7 +26,7 @@ frame[0].onload = async () => {
     
     next.addEventListener('click', async () => {
         if (next.style.visibility != 'hidden') {
-            frameContent.querySelectorAll('form').forEach((/** @type {{ style: { display: string; }; }} */ form) => {
+            frameContent.querySelectorAll('form').forEach((form) => {
                 form.style.display = 'none';
             });
             for (let i = disp_min; i < disp_min + disp_max; i++) {
@@ -40,7 +40,7 @@ frame[0].onload = async () => {
     const back = frameContent.getElementById("back");
     back.addEventListener('click', async () => {
         if (back.style.visibility != 'hidden') {
-            frameContent.querySelectorAll('form').forEach((/** @type {{ style: { display: string; }; }} */ form) => {
+            frameContent.querySelectorAll('form').forEach((form) => {
                 form.style.display = 'none';
             });
             for (let i = disp_min - 1; i >= disp_min - disp_max; i--) {
@@ -93,20 +93,20 @@ frame[0].onload = async () => {
         }
     });
 
-    frameContent.getElementById('overlay__okay').addEventListener('click', (/** @type {{ preventDefault: () => void; }} */ event) => {
+    frameContent.getElementById('overlay__okay').addEventListener('click', (event) => {
         event.preventDefault();
         frameContent.body.removeAttribute('style');
         frameContent.getElementById('overlay').removeAttribute('style');
     });
 
-    frameContent.getElementById('overlay').addEventListener('click', (/** @type {{ target: any; }} */ event) => {
+    frameContent.getElementById('overlay').addEventListener('click', (event) => {
         if (!frameContent.getElementById('score__pop').contains(event.target)) {
             frameContent.body.removeAttribute('style');
             frameContent.getElementById('overlay').removeAttribute('style');
         }
     });
 
-    frameContent.querySelectorAll('input[name="divider"]').forEach((/** @type {{ addEventListener: (arg0: string, arg1: () => void) => void; }} */ radio) => {
+    frameContent.querySelectorAll('input[name="divider"]').forEach((radio) => {
         radio.addEventListener('change', function () {
             if (this.checked) {
                 switch (this.id) {

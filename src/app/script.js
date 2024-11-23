@@ -3,11 +3,8 @@
  * import from "./pages/*"
  */
 
-/**
- * @typedef {import('jquery')} $
- */
-
 export const api = window.api;
+export const frame = $('main#main');
 
 /**
  * @param {String} title 
@@ -18,7 +15,7 @@ const loadPage = (title) => {
             frame.load('./pages/module/module.html');
             loadScript('./pages/module/module.js');
             break;
-        case 'qcm':
+        case 'tests':
             frame.load('./pages/test/test.html');
             loadScript('./pages/test/test.js');
             break;
@@ -58,8 +55,6 @@ const loadScript = (src) => {
     document.body.appendChild(script);*/
 };
 
-export const frame = $('main#main');
-
 window.onload = () => {
     const nav = document.querySelector('div.nav')
     const tit = document.querySelector('div.tit')
@@ -81,7 +76,7 @@ window.onload = () => {
             loadPage(tit.innerText = li.innerText)
         })
     });
-    loadPage('qcm');
+    loadPage('tests');
 }
 
     

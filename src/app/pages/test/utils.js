@@ -94,26 +94,25 @@ export function crct(form) {
     event.preventDefault();
     if (answer[form - 1].length !== 0) {
         frameContent.getElementById('f' + form + 'h2').innerText = 'Corrected';
-        if (JSON.stringify(json_data[form][2].slice().sort()) === JSON.stringify(answer[form - 1].slice().sort())) {
+        if (JSON.stringify(json_data[form][3].slice().sort()) === JSON.stringify(answer[form - 1].slice().sort())) {
             correct[form - 1] = 1;
         }
         else correct[form - 1] = 0;
 
         for (let i = 1; i <= 5; i++) {
             const label = frameContent.getElementById('f' + form + 'l' + i);
-            console.log(json_data[form][2], answer[form - 1]);
-            if (json_data[form][2].includes(i) && answer[form - 1].includes(i)) {
+            console.log(json_data[form][3], answer[form - 1]);
+            if (json_data[form][3].includes(i) && answer[form - 1].includes(i)) {
                 label.style.color = 'rgb(88, 255, 88)';
             }
-            else if (json_data[form][2].includes(i) && !answer[form - 1].includes(i)) {
+            else if (json_data[form][3].includes(i) && !answer[form - 1].includes(i)) {
                 label.style.color = 'rgb(255, 238, 0)';
             }
-            else if (!json_data[form][2].includes(i) && answer[form - 1].includes(i)) {
+            else if (!json_data[form][3].includes(i) && answer[form - 1].includes(i)) {
                 label.style.color = 'rgb(255, 50, 50)';
             }
         }
     }
-
 }
 
 /**
@@ -121,7 +120,7 @@ export function crct(form) {
  * @param {Number} form
  */
 export function rst(form) {
-    frameContent.getElementById('f' + form + 'h2').innerText = 'Q' + form + '.' + json_data[form][0];
+    frameContent.getElementById('f' + form + 'h2').innerText = 'Q' + form + '.' + json_data[form][3];
     for (let i = 1; i <= 5; i++) {
         frameContent.getElementById('f' + form + 'l' + i).removeAttribute('style');
     }
@@ -140,9 +139,9 @@ export async function getAnswer(start, end) {
         for (let j = 1; j <= 5; j++) {
             if (frameContent.getElementById('f' + i + 'q' + j).checked) {
                 tmp_answer.push(j);
-                console.log(tmp_answer);
             }
         }
+        console.log(tmp_answer);
         answer[i - 1] = tmp_answer;
     }
 }
