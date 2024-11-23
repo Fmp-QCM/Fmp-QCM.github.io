@@ -46,7 +46,7 @@ export function createForms(min, max) {
 
             label.appendChild(input);
             label.appendChild(div);
-            label.append(json_data[i][1][j - 1]);
+            label.append(json_data[i][2][j - 1]);
             form.appendChild(label);
             form.appendChild(frameContent.createElement('br'));
         }
